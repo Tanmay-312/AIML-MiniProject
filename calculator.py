@@ -6,6 +6,13 @@ from nltk.classify.naivebayes import NaiveBayesClassifier
 # Initialize Flask app
 app = Flask(__name__)
 
+def read_tweets(fname, t_type):
+    tweets = []
+    with open(fname, 'r', encoding='utf-8') as f:
+        for line in f:
+            tweets.append([line, t_type])
+    return tweets
+
 def get_words_in_tweets(tweets):
     all_words = []
     for (words, sentiment) in tweets:
@@ -16,13 +23,6 @@ def get_word_features(wordlist):
     wordlist = nltk.FreqDist(wordlist)
     word_features = wordlist.keys()
     return word_features
-
-def read_tweets(fname, t_type):
-    tweets = []
-    with open(fname, 'r', encoding='utf-8') as f:
-        for line in f:
-            tweets.append([line, t_type])
-    return tweets
 
 def extract_features(document):
     document_words = set(document)
@@ -35,8 +35,8 @@ def classify_tweet(tweet):
     return classifier.classify(extract_features(nltk.word_tokenize(tweet)))
 
 # Read in positive and negative training tweets
-pos_tweets = read_tweets('happy.txt', 'It is not racist/sexist')
-neg_tweets = read_tweets('sad.txt', 'It is racist/sexist')
+pos_tweets = read_tweets('happy.txt', True)
+neg_tweets = read_tweets('sad.txt', False)
 
 # Filter words that are less than 3 letters to form the training data
 tweets = []

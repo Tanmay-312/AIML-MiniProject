@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.log
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Vite
+.vite/
+
+# IDE and system files
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+*.~undo-tree~
